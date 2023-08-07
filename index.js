@@ -4,9 +4,10 @@ const mongoose = require("mongoose");
 const morgan = require("morgan");
 const dotenv = require("dotenv");
 
-dotenv.config();
+mongoose.connect('mongodb://127.0.0.1:27017/myapp', ()=> {
+    console.log("Connected to MongoDB")
+});
 
-
-app.listen(3000, ()=>{
+app.listen(27017, ()=>{
     console.log("The server is running")
 })
