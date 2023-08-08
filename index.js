@@ -2,7 +2,8 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const morgan = require("morgan");
-const userRoute = require("./routes/user.js");
+const userRoute = require("./routes/userRoute.js");
+const thoughtRoute = require("./routes/thoughtRoute.js");
 
 mongoose.connect('mongodb://127.0.0.1:27017/myapp');
 
@@ -20,6 +21,7 @@ app.use(express.json());
 app.use(morgan("common"));
 
 app.use("/api/user", userRoute);
+app.use("/api/thought", thoughtRoute);
 
 app.listen(27017, () => {
     console.log("The server is running");
