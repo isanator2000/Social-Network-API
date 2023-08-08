@@ -15,6 +15,9 @@ db.once('open', () => {
     console.log('Connected to MongoDB');
 });
 
+app.use(express.json());
+app.use(morgan("common"));
+
 app.listen(27017, () => {
     console.log("The server is running");
 });
