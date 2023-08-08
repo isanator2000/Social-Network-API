@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const usersSchema = new mongoose.Schema({
+const userSchema = new mongoose.Schema({
     username:{
         type: String,
         required: true,
@@ -12,4 +12,18 @@ const usersSchema = new mongoose.Schema({
         unique: true,
         match: [/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/, 'Please enter a valid email'],
     },
-})
+    friends:[{
+          type: Schema.Types.ObjectId,
+          ref: "User",
+        }],
+    thoughts:[{
+        type: Schema.Types.ObjectId,
+        ref: "thought",
+        }],
+    }, {
+        toJSON: {
+            virtuals: true,
+        },
+        id: false,
+});
+
