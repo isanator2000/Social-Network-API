@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const reactionSchema = require('./reaction');
 
 const thoughtSchema = new Schema({
     thoughtText: {
@@ -29,3 +30,12 @@ const thoughtSchema = new Schema({
     },
     id: false,
 });
+
+thoughtSchema.virtual('reactionCount').get(function () {
+    return this.reactions.length;
+});
+
+
+const thought = model("thought", thoughtSchema);
+
+module.exports = thought;
