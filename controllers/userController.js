@@ -34,3 +34,42 @@ async function getUsers(req, res) {
     }
   }
   
+  async function updateUser(req, res) {
+    try {
+      const updatedUser = await User.findOneAndUpdate(
+        { _id: req.params.userID },
+        { $set: req.body },
+        { new: true }
+      );
+      if (!updatedUser) {
+        return res.status(404).json({message: 'Update failed'});
+      }
+      res.json(updatedUser);
+    } catch (err) {
+      console.log(err);
+      return res.status(500).json(err);
+    }
+  }
+  
+  async function deleteUser(req, res) {
+    try {
+      const deleteUser = await User.findOneAndDelete({_id: req.params.userID});
+      if (!deleteUser) {
+        return res.status(404).json({message: 'User not found'});
+      }
+      res.json({message: 'User deleted'});
+    } catch (err) {
+      console.log(err);
+      return res.status(500).json(err);
+    }
+  }
+
+  
+module.exports = {
+getUsers,
+getSingleUser,
+createUser,
+updateUser,
+deleteUser,
+};
+  
