@@ -18,7 +18,8 @@ db.once('open', () => {
 app.use(express.json());
 app.use(morgan("common"));
 
-app.use('/api', routes);
+app.use(routes);
+app.use(express.urlencoded({ extended: true }));
 
 const PORT = process.env.PORT  || 3001
 
