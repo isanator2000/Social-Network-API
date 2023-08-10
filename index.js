@@ -2,12 +2,11 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const morgan = require("morgan");
+const db = require("./config/connection.js"); 
 const userRoute = require("./routes/userRoute.js");
 const thoughtRoute = require("./routes/thoughtRoute.js");
 
 mongoose.connect('mongodb://127.0.0.1:27017/myapp');
-
-const db = mongoose.connection;
 
 db.on('error', (error) => {
     console.error('MongoDB connection error:', error);
