@@ -56,5 +56,26 @@ async function modifyThought(req, res) {
     }
 }
 
+async function eraseThought(req, res) {
+    try {
+        const deletedThought = await Thought.findOneAndDelete(
+            { _id: req.params.thoughtID }
+        );
+        if (!deletedThought) {
+            return res.status(404).json({ message: 'Thought not found' });
+        }
+        res.json({ message: 'Thought deleted' });
+    } catch (err) {
+        console.log(err);
+        return res.status(500).json(err);
+    }
+}
 
+module.exports = {
+fetchThoughts,
+getThought,
+createNewThought,
+modifyThought,
+eraseThought,
+};
 
