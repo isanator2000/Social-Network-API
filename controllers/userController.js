@@ -24,4 +24,13 @@ async function getUsers(req, res) {
     }
   }
 
+  async function createUser(req, res) {
+    try {
+      const newUser = await User.create(req.body);
+      res.json(newUser);
+    } catch (err) {
+      console.log(err);
+      return res.status(500).json(err);
+    }
+  }
   
