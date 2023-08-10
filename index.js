@@ -18,8 +18,8 @@ db.once('open', () => {
 app.use(express.json());
 app.use(morgan("common"));
 
-app.use('/api', routes); 
+app.use('/api', routes);
 
-app.listen(27017, () => {
-    console.log("The server is running");
+app.listen(3000, () => {
+    console.log("The server is running on port 3000");
 });
