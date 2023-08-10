@@ -3,8 +3,7 @@ const app = express();
 const mongoose = require("mongoose");
 const morgan = require("morgan");
 const db = require("./config/connection.js"); 
-const userRoute = require("./routes/userRoute.js");
-const thoughtRoute = require("./routes/thoughtRoute.js");
+const routes = require('./routes');
 
 mongoose.connect('mongodb://127.0.0.1:27017/myapp');
 
@@ -19,8 +18,7 @@ db.once('open', () => {
 app.use(express.json());
 app.use(morgan("common"));
 
-app.use("/api/user", userRoute);
-app.use("/api/thought", thoughtRoute);
+app.use('/api', routes); 
 
 app.listen(27017, () => {
     console.log("The server is running");
