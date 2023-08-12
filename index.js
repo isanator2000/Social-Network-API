@@ -1,28 +1,16 @@
-const express = require("express");
-const app = express();
-const mongoose = require("mongoose");
-const morgan = require("morgan");
-const db = require("./config/connection.js"); 
+const express = require('express');
+const db = require('./config/connection');
 const routes = require('./routes');
 
-mongoose.connect('mongodb://127.0.0.1:27017/myapp');
+const PORT = process.env.PORT || 3002;
+const app = express();
 
-db.on('error', (error) => {
-    console.error('MongoDB connection error:', error);
-});
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(routes);
 
 db.once('open', () => {
-    console.log('Connected to MongoDB');
-});
-
-app.use(express.json());
-app.use(morgan("common"));
-
-app.use(routes);
-app.use(express.urlencoded({ extended: true }));
-
-const PORT = process.env.PORT  || 3001
-
-app.listen(PORT, () => {
-    console.log("The server is running on port 3001");
+  app.listen(PORT, () => {
+    console.log(`API server running on port ${PORT}!`);
+  });
 });
